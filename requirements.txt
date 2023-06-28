@@ -3,3 +3,4 @@ elevenlabs
 python-dotenv
 streamlit
 openai
+azure-cognitiveservices-speech
