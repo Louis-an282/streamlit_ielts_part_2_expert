@@ -4,3 +4,8 @@ python-dotenv
 streamlit
 openai
 azure-cognitiveservices-speech
+build-essential
+libssl-dev
+ca-certificates
+libasound2
+wget
