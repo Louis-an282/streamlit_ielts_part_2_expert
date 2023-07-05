@@ -2,4 +2,7 @@ build-essential
 libssl-dev
 ca-certificates
 libasound2
+libasound2-plugins
+alsa-utils
+libssl-doc
 wget
