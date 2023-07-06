@@ -48,9 +48,11 @@ def text_to_speech(text, voice_name='en-US-AriaNeural'):
                 "User-Agent": "TextToSpeechApp",
             },
             data=f"""
-                <speak version='1.0' xml:lang='en-US'>
+                <speak version='1.0' xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang='en-US'>
                 <voice name='{voice_name}'>
+                <mstts:express-as role="YoungAdultFemale" style="chat">
                     {text}
+                </mstts:express-as>
                 </voice>
                 </speak>
             """,
@@ -75,10 +77,10 @@ def app():
         topic = st.text_input("Enter your chosen topic in reponse to the task card")
 
         if st.form_submit_button("Submit"):
-            with st.spinner('Generating answer...'):
+            with st.spinner('💬 Generating answer...'):
                 # Chain 1: Generating an answer
                 template = """You are an 18-year-old girl who is attending an English test. 
-         Answer the IELTS Speaking Part 2 task card in 200 words using the chosen topic. Use a conversational tone but not too casual. The vocabulary should be that of a high school student.
+         Answer the IELTS Speaking Part 2 task card in 180 words using the chosen topic. Use a conversational tone but not too casual. The vocabulary should be that of a high school student.
          Your must not use written English such as "furthermore", "therefore", "overall", and "in conclusion". 
          Here is the task card: {card}. And here's the chosen topic: {topic}"""
                 prompt_template = PromptTemplate(input_variables=["card", "topic"], template=template)
@@ -93,12 +95,12 @@ def app():
                 collocation_chain = LLMChain(llm=llm, prompt=prompt_template)
                 collocations = collocation_chain.run(answer_text)
                 st.success(answer_text)
-            with st.spinner('Generating audio and extracting collocations...'):
+            with st.spinner('🔈 Generating audio and extracting collocations...'):
             # voice_name = st.selectbox("Select a voice:", ['en-US-AriaNeural', 'en-US-GuyNeural', 'en-GB-RyanNeural'])
                 speech = text_to_speech(answer_text, 'en-US-AriaNeural')
                 st.audio(speech, format='wav')
                 st.header("Collocations")
                 st.markdown(collocations)
-    st.write("By [Quang](https://dqnotes.com)")
+    st.write("By [Quang](https://dqnotes.com). The text-to-speech service is not free. Please refrain from abusing this app. 🙏")
 if __name__ == '__main__':
     app()
