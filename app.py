@@ -14,6 +14,8 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 
 llm = ChatOpenAI(temperature=1.2, model="gpt-3.5-turbo")
 
+# Azure code credit to https://github.com/hipnologo/openai_azure_text2speech
+
 def get_azure_access_token():
     azure_key = os.environ.get("AZURE_SUBSCRIPTION_KEY")
     try:
@@ -77,7 +79,7 @@ def app():
                 # Chain 1: Generating an answer
                 template = """You are an 18-year-old girl who is attending an English test. 
          Answer the IELTS Speaking Part 2 task card in 200 words using the chosen topic. Use a conversational tone but not too casual. The vocabulary should be that of a high school student.
-         Avoid formality and avoid written English such as furthermore, therefore, overall, and in conclusion. 
+         Your must not use written English such as "furthermore", "therefore", "overall", and "in conclusion". 
          Here is the task card: {card}. And here's the chosen topic: {topic}"""
                 prompt_template = PromptTemplate(input_variables=["card", "topic"], template=template)
                 answer_chain = LLMChain(llm=llm, prompt=prompt_template)
@@ -97,6 +99,6 @@ def app():
                 st.audio(speech, format='wav')
                 st.header("Collocations")
                 st.markdown(collocations)
-
+    st.write("By [Quang](https://dqnotes.com)")
 if __name__ == '__main__':
     app()
