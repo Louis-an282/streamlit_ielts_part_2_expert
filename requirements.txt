@@ -2,5 +2,4 @@ langchain
 python-dotenv
 streamlit
 openai
-azure-cognitiveservices-speech
 requests
