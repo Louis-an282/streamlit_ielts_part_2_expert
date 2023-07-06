@@ -97,10 +97,13 @@ def app():
                 st.success(answer_text)
             with st.spinner('🔈 Generating audio and extracting collocations...'):
             # voice_name = st.selectbox("Select a voice:", ['en-US-AriaNeural', 'en-US-GuyNeural', 'en-GB-RyanNeural'])
-                speech = text_to_speech(answer_text, 'en-US-AriaNeural')
-                st.audio(speech, format='wav')
+                answer_audio = text_to_speech(answer_text, 'en-US-AriaNeural')
+                with open('answer_audio.wav', 'wb') as f:
+                    f.write(answer_audio)
+                st.audio('answer_audio.wav')
+                st.caption('Download the audio by click on the ⋮ icon on the player.')
                 st.header("Collocations")
                 st.markdown(collocations)
-    st.write("By [Quang](https://dqnotes.com). The text-to-speech service is not free. Please refrain from abusing this app. 🙏")
+    st.caption("The text-to-speech service is not free. Please use the app responsibly 🙏")
 if __name__ == '__main__':
     app()
