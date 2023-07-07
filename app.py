@@ -66,6 +66,7 @@ def text_to_speech(text, voice_name='en-US-AriaNeural'):
 
 def app():
     st.title("IELTS Speaking Part 2 Expert")
+    st.set_page_config(page_title="Part 2 Expert", page_icon="🎩")
 
     with st.form(key='my_form'):
         card = st.text_area(
