@@ -16,6 +16,8 @@ llm = ChatOpenAI(temperature=1.2, model="gpt-3.5-turbo")
 
 # Azure code credit to https://github.com/hipnologo/openai_azure_text2speech
 
+st.set_page_config(page_title="Part 2 Expert", page_icon="🎩")
+
 def get_azure_access_token():
     azure_key = os.environ.get("AZURE_SUBSCRIPTION_KEY")
     try:
@@ -66,7 +68,6 @@ def text_to_speech(text, voice_name='en-US-AriaNeural'):
 
 def app():
     st.title("IELTS Speaking Part 2 Expert")
-    st.set_page_config(page_title="Part 2 Expert", page_icon="🎩")
 
     with st.form(key='my_form'):
         card = st.text_area(
