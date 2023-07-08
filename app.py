@@ -68,6 +68,18 @@ def text_to_speech(text, voice_name='en-US-AriaNeural'):
 
 def app():
     st.title("IELTS Speaking Part 2 Expert")
+    st.sidebar.markdown(
+        """
+        # Welcome! 👋
+        ### 💡 Instructions 
+
+        1. Enter a task card. You can get one [here](https://www.examword.com/ielts-practice/speaking-exam-question)
+        2. Enter a specific topic you want to talk about
+        3. Hit **Submit**
+
+        You will get a model answer, along with several useful collocations.
+        """
+    )
 
     with st.form(key='my_form'):
         card = st.text_area(
@@ -107,5 +119,7 @@ def app():
                 st.header("Collocations")
                 st.markdown(collocations)
     st.caption("The text-to-speech service is not free. Please use the app responsibly 🙏")
+    st.divider()
+    st.write("By [Quang](https://dqnotes.com)")
 if __name__ == '__main__':
     app()
